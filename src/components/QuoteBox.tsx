@@ -32,7 +32,7 @@ const QuoteBox = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-center">
       <div className="min-h-[180px] rounded-3xl border-4 border-candy-coral bg-candy-cream p-10 shadow-lg flex items-center justify-center">
         <p
           className={`font-serif-display text-2xl md:text-3xl font-semibold leading-relaxed text-foreground transition-all duration-300 ${
