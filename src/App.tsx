@@ -14,7 +14,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       {/* CAMBIO AQUÍ: Añadimos el basename */}
-      <BrowserRouter basename="/unimetropolitana">
+      <BrowserRouter basename="/unimetropolitana.">
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
