@@ -21,6 +21,22 @@ const GummyGame = () => {
   const spawnRef = useRef<number | null>(null);
   const timerRef = useRef<number | null>(null);
 
+  const popSound = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio("https://cdn.pixabay.com/audio/2022/03/24/audio_4532e29564.mp3");
+    audio.volume = 0.4;
+    popSound.current = audio;
+  }, []);
+
+  const playPop = () => {
+    if (popSound.current) {
+      const clone = popSound.current.cloneNode() as HTMLAudioElement;
+      clone.volume = 0.4;
+      clone.play();
+    }
+  };
+
   const spawnGummy = useCallback(() => {
     const gummy: Gummy = {
       id: nextId.current++,
@@ -29,7 +45,7 @@ const GummyGame = () => {
       y: Math.random() * 75 + 5,
       popping: false,
     };
-    setGummies((prev) => [...prev.slice(-12), gummy]);
+    setGummies((prev) => [...prev.slice(-15), gummy]);
   }, []);
 
   const startGame = () => {
@@ -50,7 +66,7 @@ const GummyGame = () => {
 
   useEffect(() => {
     if (!running) return;
-    spawnRef.current = window.setInterval(spawnGummy, 800);
+    spawnRef.current = window.setInterval(spawnGummy, 450);
     timerRef.current = window.setInterval(() => {
       setTimeLeft((t) => {
         if (t <= 1) {
@@ -67,6 +83,7 @@ const GummyGame = () => {
   }, [running, spawnGummy, stopGame]);
 
   const catchGummy = (id: number) => {
+    playPop();
     setGummies((prev) =>
       prev.map((g) => (g.id === id ? { ...g, popping: true } : g))
     );
